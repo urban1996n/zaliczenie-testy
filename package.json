@@ -1,0 +1,20 @@
+{
+  "name": "zaliczenie_testy_kontrola",
+  "version": "1.0.0",
+  "description": "Projekt zaliczeniowy na przedmiot Testy i kontrola jakości",
+  "homepage": "https://github.com/urban1996n/zaliczenie-testy#readme",
+  "bugs": {
+    "url": "https://github.com/urban1996n/zaliczenie-testy/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/urban1996n/zaliczenie-testy.git"
+  },
+  "license": "ISC",
+  "author": "Wojciech Kluz",
+  "type": "commonjs",
+  "main": "public/index.js",
+  "scripts": {
+    "test": "test"
+  }
+}
