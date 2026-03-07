@@ -1,0 +1,37 @@
+[
+  {
+    "id": "1",
+    "name": "Laptop Pro",
+    "description": "Powerful laptop for professionals.",
+    "price": 1200.00,
+    "imageUrl": "/images/laptop.jpg"
+  },
+  {
+    "id": "2",
+    "name": "Wireless Mouse",
+    "description": "Ergonomic wireless mouse.",
+    "price": 25.00,
+    "imageUrl": "/images/mouse.webp"
+  },
+  {
+    "id": "3",
+    "name": "Mechanical Keyboard",
+    "description": "RGB mechanical gaming keyboard.",
+    "price": 80.00,
+    "imageUrl": "/images/keyboard.jpg"
+  },
+  {
+    "id": "4",
+    "name": "USB-C Hub",
+    "description": "Multi-port USB-C adapter.",
+    "price": 45.00,
+    "imageUrl": "/images/usb_hub.jpg"
+  },
+  {
+    "id": "5",
+    "name": "External SSD 1TB",
+    "description": "Fast and portable solid-state drive.",
+    "price": 100.00,
+    "imageUrl": "/images/ssd.png"
+  }
+]
