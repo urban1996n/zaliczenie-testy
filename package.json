@@ -18,7 +18,9 @@
     "test:unit": "jest  --maxWorkers=33%",
     "test:e2e": "cypress run --headless",
     "test": "npm run test:unit & npm run test:e2e",
-    "start": "vite"
+    "start": "vite",
+    "build": "tsc -b tsconfig.app.json && vite build",
+    "lint": "eslint ."
   },
   "dependencies": {
     "bootstrap": "^5.3.8",

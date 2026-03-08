@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint code
+        run: npm run lint
+
+      - name: Build project
+        run: npm run build
+
+      - name: Run unit tests (Jest)
+        run: npm run test:unit
+
+      - name: Run E2E tests (Cypress)
+        uses: cypress-io/github-action@v6
+        with:
+          start: npm run start
+          wait-on: 'http://localhost:5173'
+          # We've already installed dependencies and built the app
+          install: false
