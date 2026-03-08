@@ -21,7 +21,11 @@ const LoginModal: React.FC<LoginModalProps> = ({ show, handleClose }) => {
   };
 
   return (
-    <Modal show={show} onHide={handleClose}>
+    <Modal
+        data-testid="login-modal"
+        show={show}
+        onHide={handleClose}
+    >
       <Modal.Header closeButton>
         <Modal.Title>Login</Modal.Title>
       </Modal.Header>

@@ -1,10 +1,8 @@
+import {navbar} from "./Navbar";
+
 export class ProductListPage {
   visit() {
     cy.visit('/');
-  }
-
-  getProducts() {
-    return cy.get('[data-testid="product-name"]');
   }
 
   addToCart(index: number) {
@@ -12,7 +10,7 @@ export class ProductListPage {
   }
 
   openCart() {
-    cy.get('[data-testid="nav-cart"]').click();
+    navbar.openCart();
   }
 }
 

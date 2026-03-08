@@ -1,5 +1,6 @@
 import { productListPage } from '../page_objects/ProductListPage';
 import { cartModal } from '../page_objects/CartModal';
+import {navbar} from "../page_objects/Navbar";
 
 describe('Store E2E Tests', () => {
   const username = 'TestUser';
@@ -47,7 +48,7 @@ describe('Store E2E Tests', () => {
     cy.reload();
     
     // Check if still logged in (it should be because of session storage in AuthContext)
-    cy.get('[data-testid="user-info"]').should('contain', username);
+    navbar.assertUsername(username);
     
     // Open cart and check item
     productListPage.openCart();

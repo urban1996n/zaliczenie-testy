@@ -1,5 +1,8 @@
 /// <reference types="cypress" />
 
+import {navbar} from "../page_objects/Navbar";
+import {loginPopup} from "../page_objects/LoginPopup";
+
 declare global {
   namespace Cypress {
     interface Chainable {
@@ -10,15 +13,15 @@ declare global {
 }
 
 Cypress.Commands.add('login', (username: string) => {
-  cy.get('[data-testid="nav-login"]').click();
-  cy.get('[data-testid="login-username"]').type(username);
-  cy.get('[data-testid="login-submit"]').click();
-  cy.get('[data-testid="user-info"]').should('contain', username);
+  navbar.openLoginPopup();
+  loginPopup.enterUsername(username);
+  loginPopup.login();
+  navbar.assertUsername(username);
 });
 
 Cypress.Commands.add('logout', () => {
-  cy.get('[data-testid="nav-logout"]').click();
-  cy.get('[data-testid="nav-login"]').should('be.visible');
+  navbar.logout();
+  navbar.getLoginButton().should('exist').and('be.visible');
 });
 
 export {};
