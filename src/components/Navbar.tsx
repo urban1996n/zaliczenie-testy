@@ -21,7 +21,11 @@ const LoginModal: React.FC<LoginModalProps> = ({ show, handleClose }) => {
   };
 
   return (
-    <Modal show={show} onHide={handleClose}>
+    <Modal
+        data-testid="login-modal"
+        show={show}
+        onHide={handleClose}
+    >
       <Modal.Header closeButton>
         <Modal.Title>Login</Modal.Title>
       </Modal.Header>
@@ -35,9 +39,10 @@ const LoginModal: React.FC<LoginModalProps> = ({ show, handleClose }) => {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
+              data-testid="login-username"
             />
           </Form.Group>
-          <Button variant="primary" type="submit">
+          <Button variant="primary" type="submit" data-testid="login-submit">
             Login
           </Button>
         </Form>
@@ -72,11 +77,11 @@ const CartModal: React.FC<CartModalProps> = ({ show, handleClose }) => {
         ) : (
           <ul className="list-group">
             {cart.map((item) => (
-              <li key={item.id} className="list-group-item d-flex justify-content-between align-items-center">
+              <li key={item.id} className="list-group-item d-flex justify-content-between align-items-center" data-testid={`cart-item-${item.id}`}>
                 <div>
                   {item.name} (x{item.quantity}) - ${item.price.toFixed(2)}
                 </div>
-                <Button variant="danger" size="sm" onClick={() => removeFromCart(item.id)}>
+                <Button variant="danger" size="sm" onClick={() => removeFromCart(item.id)} data-testid={`remove-from-cart-${item.id}`}>
                   Remove
                 </Button>
               </li>
@@ -86,14 +91,14 @@ const CartModal: React.FC<CartModalProps> = ({ show, handleClose }) => {
       </Modal.Body>
       <Modal.Footer>
         <div className="d-flex justify-content-between w-100">
-          <strong>Total: ${total.toFixed(2)}</strong>
+          <strong data-testid="cart-total">Total: ${total.toFixed(2)}</strong>
           {cart.length > 0 && (
-            <Button variant="warning" onClick={clearCart}>
+            <Button variant="warning" onClick={clearCart} data-testid="clear-cart">
               Clear Cart
             </Button>
           )}
         </div>
-        <Button variant="secondary" onClick={handleClose}>
+        <Button variant="secondary" onClick={handleClose} data-testid="close-cart">
           Close
         </Button>
       </Modal.Footer>
@@ -123,18 +128,18 @@ const AppNavbar: React.FC = () => {
             <Nav className="ms-auto">
               {user ? (
                 <>
-                  <Navbar.Text className="me-3">
+                  <Navbar.Text className="me-3" data-testid="user-info">
                     Signed in as: <strong>{user}</strong>
                   </Navbar.Text>
-                  <Button variant="outline-light" className="me-2" onClick={handleCartClick}>
+                  <Button variant="outline-light" className="me-2" onClick={handleCartClick} data-testid="nav-cart">
                     Cart
                   </Button>
-                  <Button variant="outline-light" onClick={logout}>
+                  <Button variant="outline-light" onClick={logout} data-testid="nav-logout">
                     Logout
                   </Button>
                 </>
               ) : (
-                <Button variant="outline-light" onClick={handleLoginClick}>
+                <Button variant="outline-light" onClick={handleLoginClick} data-testid="nav-login">
                   Login
                 </Button>
               )}

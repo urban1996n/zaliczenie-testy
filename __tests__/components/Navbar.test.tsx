@@ -61,7 +61,6 @@ describe('Navbar', () => {
     const input = screen.getByPlaceholderText('Enter username');
     fireEvent.change(input, { target: { value: 'newuser' } });
     
-    // Find the form and submit it
     const form = input.closest('form')!;
     fireEvent.submit(form);
     

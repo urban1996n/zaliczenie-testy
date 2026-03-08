@@ -27,13 +27,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     <Card style={{ width: '18rem', margin: '1rem' }}>
       <Card.Img variant="top" src={product.imageUrl} style={{ height: '180px', objectFit: 'cover' }} />
       <Card.Body>
-        <Card.Title>{product.name}</Card.Title>
+        <Card.Title data-testid="product-name">{product.name}</Card.Title>
         <Card.Text>{product.description}</Card.Text>
         <Card.Text>
-          <strong>${product.price.toFixed(2)}</strong>
+          <strong data-testid="product-price">${product.price.toFixed(2)}</strong>
         </Card.Text>
         {user && ( // Only show "Add to Cart" if user is logged in
-          <Button variant="primary" onClick={handleAddToCart}>
+          <Button variant="primary" onClick={handleAddToCart} data-testid="add-to-cart">
             Add to Cart
           </Button>
         )}

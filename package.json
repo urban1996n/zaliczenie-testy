@@ -16,7 +16,7 @@
   "main": "public/index.js",
   "scripts": {
     "test:unit": "jest  --maxWorkers=33%",
-    "test:e2e": "cypress run --headless --browser=chromium",
+    "test:e2e": "cypress run --headless",
     "test": "npm run test:unit & npm run test:e2e",
     "start": "vite"
   },

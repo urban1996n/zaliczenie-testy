@@ -4,11 +4,9 @@ import ProductList from '../../src/components/ProductList';
 import { useAuth } from '../../src/Domain/Identity/Auth/AuthContext';
 import { useCart } from '../../src/Domain/Store/Cart/CartContext';
 
-// Mock the context hooks
 jest.mock('../../src/Domain/Identity/Auth/AuthContext');
 jest.mock('../../src/Domain/Store/Cart/CartContext');
 
-// Mock ProductCard to simplify tests
 jest.mock('../../src/components/ProductCard', () => ({ product }: any) => (
   <div data-testid="product-card">{product.name}</div>
 ));
@@ -23,7 +21,6 @@ describe('ProductList', () => {
     (useAuth as jest.Mock).mockReturnValue({ user: null });
     (useCart as jest.Mock).mockReturnValue({ addToCart: jest.fn() });
     
-    // Mock window fetch
     window.fetch = jest.fn();
   });
 
