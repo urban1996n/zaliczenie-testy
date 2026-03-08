@@ -17,22 +17,17 @@ describe('Store E2E Tests', () => {
   it('should add products to cart and manage them', () => {
     cy.login(username);
 
-    // Add first two products
     productListPage.addToCart(0);
     productListPage.addToCart(1);
 
-    // Open cart
     productListPage.openCart();
 
-    // Verify items in cart
     cartModal.getCartItems().should('have.length', 2);
     cartModal.getTotal().should('not.contain', '$0.00');
 
-    // Remove first item
     cartModal.removeItem(0);
     cartModal.getCartItems().should('have.length', 1);
 
-    // Clear cart
     cartModal.clearCart();
     cy.contains('Your cart is empty.').should('be.visible');
 
@@ -44,13 +39,10 @@ describe('Store E2E Tests', () => {
     cy.login(username);
     productListPage.addToCart(0);
     
-    // Reload page
     cy.reload();
     
-    // Check if still logged in (it should be because of session storage in AuthContext)
     navbar.assertUsername(username);
     
-    // Open cart and check item
     productListPage.openCart();
     cartModal.getCartItems().should('have.length', 1);
     

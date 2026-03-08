@@ -4,7 +4,6 @@ import ProductCard from '../../src/components/ProductCard';
 import { useAuth } from '../../src/Domain/Identity/Auth/AuthContext';
 import { useCart } from '../../src/Domain/Store/Cart/CartContext';
 
-// Mock the context hooks
 jest.mock('../../src/Domain/Identity/Auth/AuthContext');
 jest.mock('../../src/Domain/Store/Cart/CartContext');
 
