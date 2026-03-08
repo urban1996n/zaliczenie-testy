@@ -23,8 +23,8 @@ const ProductList: React.FC = () => {
         }
         const data: Product[] = await response.json();
         setProducts(data);
-      } catch (e: any) {
-        setError(`Failed to fetch products: ${e.message}`);
+      } catch (e: unknown) {
+        setError(`Failed to fetch products: ${e instanceof Error ? e.message : 'Unknown error'}`);
       }
     };
 
