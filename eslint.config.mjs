@@ -19,5 +19,17 @@ export default defineConfig([
       ecmaVersion: 2020,
       globals: globals.browser,
     },
+    rules: {
+      'react-refresh/only-export-components': [
+        'error',
+        { allowExportNames: ['useAuth', 'useCart'] },
+      ],
+    },
+  },
+  {
+    files: ['cypress/**/*.ts'],
+    rules: {
+      '@typescript-eslint/no-namespace': 'off',
+    },
   },
 ])

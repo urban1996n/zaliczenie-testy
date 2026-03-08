@@ -7,7 +7,15 @@ import { useCart } from '../../src/Domain/Store/Cart/CartContext';
 jest.mock('../../src/Domain/Identity/Auth/AuthContext');
 jest.mock('../../src/Domain/Store/Cart/CartContext');
 
-jest.mock('../../src/components/ProductCard', () => ({ product }: any) => (
+interface Product {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  imageUrl: string;
+}
+
+jest.mock('../../src/components/ProductCard', () => ({ product }: { product: Product }) => (
   <div data-testid="product-card">{product.name}</div>
 ));
 
