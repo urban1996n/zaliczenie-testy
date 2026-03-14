@@ -2,6 +2,7 @@
 
 Prosta aplikacja sklepu internetowego zbudowana w oparciu o React, TypeScript i Vite. Aplikacja pozwala przeglądać listę produktów, logować użytkownika oraz zarządzać koszykiem. Projekt zawiera testy jednostkowe w Jest oraz testy end-to-end w Cypress.
 
+> **Ważne:** projekt celowo jest nieidealny i posiada ograniczoną funkcjonalnośc, po prostu ma być co testować
 ## Wymagania
 
 - Node.js 20 lub nowszy
