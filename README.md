@@ -1,73 +1,88 @@
-# React + TypeScript + Vite
+# Projekt zaliczeniowy: testy i kontrola jakości
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Prosta aplikacja sklepu internetowego zbudowana w oparciu o React, TypeScript i Vite. Aplikacja pozwala przeglądać listę produktów, logować użytkownika oraz zarządzać koszykiem. Projekt zawiera testy jednostkowe w Jest oraz testy end-to-end w Cypress.
 
-Currently, two official plugins are available:
+## Wymagania
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Node.js 20 lub nowszy
+- npm
 
-## React Compiler
+## Instalacja
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Zainstaluj zależności poleceniem:
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm ci
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Jeśli chcesz użyć standardowej instalacji npm, możesz też uruchomić:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+npm install
+```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Uruchomienie projektu
+
+Aby uruchomić aplikację lokalnie w trybie developerskim:
+
+```bash
+npm run start
+```
+
+Domyślnie aplikacja będzie dostępna pod adresem:
+
+```text
+http://localhost:5173
+```
+
+## Budowanie projektu
+
+Aby zbudować wersję produkcyjną:
+
+```bash
+npm run build
+```
+
+## Testy
+
+### Testy jednostkowe
+
+Uruchomienie testów jednostkowych:
+
+```bash
+npm run test:unit
+```
+
+### Testy E2E
+
+Testy Cypress wymagają działającej aplikacji pod `http://localhost:5173`.
+
+1. W pierwszym terminalu uruchom aplikację:
+
+```bash
+npm run start
+```
+
+2. W drugim terminalu uruchom testy E2E:
+
+```bash
+npm run test:e2e
+```
+
+### Wszystkie testy
+
+Skrypt:
+
+```bash
+npm run test
+```
+
+uruchamia testy jednostkowe i E2E równolegle, ale nie startuje serwera Vite automatycznie. Przed jego użyciem uruchom wcześniej aplikację przez `npm run start`.
+
+## Dodatkowe polecenia
+
+Sprawdzenie lintingu:
+
+```bash
+npm run lint
 ```
