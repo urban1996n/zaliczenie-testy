@@ -6,12 +6,23 @@ on:
   pull_request:
     branches: [ main ]
   workflow_dispatch:
+    inputs:
+      requested_by:
+        description: "Who triggered the run"
+        required: false
+        type: string
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Show manual trigger info
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        run: |
+          echo "Triggered manually"
+          echo "requested_by=${{ inputs.requested_by }}"
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -38,5 +49,4 @@ jobs:
         with:
           start: npm run start
           wait-on: 'http://localhost:5173'
-          # We've already installed dependencies and built the app
           install: false
