@@ -43,7 +43,12 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product, comments, onBa
             style={{ height: '360px', objectFit: 'cover' }}
           />
           <Card.Body>
-            <Button variant="link" className="px-0 mb-3" onClick={onBack}>
+            <Button
+              variant="link"
+              className="px-0 mb-3"
+              onClick={onBack}
+              data-testid="back-to-products"
+            >
               Back to products
             </Button>
             <Card.Title as="h2">{product.name}</Card.Title>
@@ -52,7 +57,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product, comments, onBa
               <strong>${product.price.toFixed(2)}</strong>
             </Card.Text>
             {user && (
-              <Button variant="primary" onClick={handleAddToCart}>
+              <Button variant="primary" onClick={handleAddToCart} data-testid="details-add-to-cart">
                 Add to Cart
               </Button>
             )}

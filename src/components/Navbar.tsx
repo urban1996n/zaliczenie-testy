@@ -67,7 +67,7 @@ const CartModal: React.FC<CartModalProps> = ({ show, handleClose }) => {
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   return (
-    <Modal show={show} onHide={handleClose}>
+    <Modal show={show} onHide={handleClose} data-testid="cart-modal">
       <Modal.Header closeButton>
         <Modal.Title>Your Cart</Modal.Title>
       </Modal.Header>
