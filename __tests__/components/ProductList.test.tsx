@@ -1,11 +1,6 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import ProductList from '../../src/components/ProductList';
-import { useAuth } from '../../src/Domain/Identity/Auth/AuthContext';
-import { useCart } from '../../src/Domain/Store/Cart/CartContext';
-
-jest.mock('../../src/Domain/Identity/Auth/AuthContext');
-jest.mock('../../src/Domain/Store/Cart/CartContext');
 
 interface Product {
   id: string;
@@ -15,8 +10,12 @@ interface Product {
   imageUrl: string;
 }
 
-jest.mock('../../src/components/ProductCard', () => ({ product }: { product: Product }) => (
-  <div data-testid="product-card">{product.name}</div>
+const mockOnSelect = jest.fn();
+
+jest.mock('../../src/components/ProductCard', () => ({ product, onSelect }: { product: Product; onSelect: (productId: string) => void }) => (
+  <button data-testid="product-card" onClick={() => onSelect(product.id)}>
+    {product.name}
+  </button>
 ));
 
 const mockProducts = [
@@ -25,55 +24,24 @@ const mockProducts = [
 ];
 
 describe('ProductList', () => {
-  beforeEach(() => {
-    (useAuth as jest.Mock).mockReturnValue({ user: null });
-    (useCart as jest.Mock).mockReturnValue({ addToCart: jest.fn() });
-    
-    window.fetch = jest.fn();
-  });
-
   afterEach(() => {
     jest.clearAllMocks();
   });
 
-  it('should render loading state and then products', async () => {
-    (window.fetch as jest.Mock).mockResolvedValueOnce({
-      ok: true,
-      json: async () => mockProducts,
-    });
-
-    render(<ProductList />);
+  it('should render products', () => {
+    render(<ProductList products={mockProducts} onSelect={mockOnSelect} />);
 
     expect(screen.getByText('Our Products')).toBeInTheDocument();
-    
-    await waitFor(() => {
-      expect(screen.getAllByTestId('product-card')).toHaveLength(2);
-    });
-    
+    expect(screen.getAllByTestId('product-card')).toHaveLength(2);
     expect(screen.getByText('Product 1')).toBeInTheDocument();
     expect(screen.getByText('Product 2')).toBeInTheDocument();
   });
 
-  it('should show error message if fetch fails', async () => {
-    (window.fetch as jest.Mock).mockRejectedValueOnce(new Error('Fetch failed'));
+  it('should call onSelect for the chosen product', () => {
+    render(<ProductList products={mockProducts} onSelect={mockOnSelect} />);
 
-    render(<ProductList />);
+    fireEvent.click(screen.getAllByTestId('product-card')[1]);
 
-    await waitFor(() => {
-      expect(screen.getByText(/Failed to fetch products: Fetch failed/i)).toBeInTheDocument();
-    });
-  });
-
-  it('should show error message if response is not ok', async () => {
-    (window.fetch as jest.Mock).mockResolvedValueOnce({
-      ok: false,
-      status: 404,
-    });
-
-    render(<ProductList />);
-
-    await waitFor(() => {
-      expect(screen.getByText(/Failed to fetch products: HTTP error! status: 404/i)).toBeInTheDocument();
-    });
+    expect(mockOnSelect).toHaveBeenCalledWith('2');
   });
 });

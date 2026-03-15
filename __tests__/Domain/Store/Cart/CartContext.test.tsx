@@ -1,9 +1,12 @@
 import React from 'react';
 import { renderHook, act } from '@testing-library/react';
 import { CartProvider, useCart } from '../../../../src/Domain/Store/Cart/CartContext';
+import { NotificationProvider } from '../../../../src/Domain/UI/Notification/NotificationContext';
 
 const wrapper = ({ children }: { children: React.ReactNode }) => (
-  <CartProvider>{children}</CartProvider>
+  <NotificationProvider>
+    <CartProvider>{children}</CartProvider>
+  </NotificationProvider>
 );
 
 describe('CartContext', () => {

@@ -1,9 +1,12 @@
 import React from 'react';
 import { renderHook, act } from '@testing-library/react';
 import { AuthProvider, useAuth } from '../../../../src/Domain/Identity/Auth/AuthContext';
+import { NotificationProvider } from '../../../../src/Domain/UI/Notification/NotificationContext';
 
 const wrapper = ({ children }: { children: React.ReactNode }) => (
-  <AuthProvider>{children}</AuthProvider>
+  <NotificationProvider>
+    <AuthProvider>{children}</AuthProvider>
+  </NotificationProvider>
 );
 
 describe('AuthContext', () => {

@@ -3,9 +3,16 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import AppNavbar from '../../src/components/Navbar';
 import { useAuth } from '../../src/Domain/Identity/Auth/AuthContext';
 import { useCart } from '../../src/Domain/Store/Cart/CartContext';
+import { NotificationProvider } from '../../src/Domain/UI/Notification/NotificationContext';
 
 jest.mock('../../src/Domain/Identity/Auth/AuthContext');
 jest.mock('../../src/Domain/Store/Cart/CartContext');
+
+const renderNavbar = () => render(
+  <NotificationProvider>
+    <AppNavbar />
+  </NotificationProvider>
+);
 
 describe('Navbar', () => {
   const mockLogin = jest.fn();
@@ -31,7 +38,7 @@ describe('Navbar', () => {
   });
 
   it('should show Login button when not logged in', () => {
-    render(<AppNavbar />);
+    renderNavbar();
     expect(screen.getByText('Login')).toBeInTheDocument();
   });
 
@@ -40,7 +47,7 @@ describe('Navbar', () => {
       user: 'testuser',
       logout: mockLogout
     });
-    render(<AppNavbar />);
+    renderNavbar();
     expect(screen.getByText(/Signed in as:/)).toBeInTheDocument();
     expect(screen.getByText('testuser')).toBeInTheDocument();
     expect(screen.getByText('Logout')).toBeInTheDocument();
@@ -48,14 +55,14 @@ describe('Navbar', () => {
   });
 
   it('should open login modal when Login button is clicked', () => {
-    render(<AppNavbar />);
+    renderNavbar();
     fireEvent.click(screen.getByText('Login'));
     expect(screen.getByRole('dialog')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('Enter username')).toBeInTheDocument();
   });
 
   it('should call login and close modal when login form is submitted', () => {
-    render(<AppNavbar />);
+    renderNavbar();
     fireEvent.click(screen.getByText('Login'));
     
     const input = screen.getByPlaceholderText('Enter username');
@@ -78,7 +85,7 @@ describe('Navbar', () => {
       clearCart: mockClearCart
     });
 
-    render(<AppNavbar />);
+    renderNavbar();
     fireEvent.click(screen.getByText('Cart'));
     
     expect(screen.getByText('Your Cart')).toBeInTheDocument();
@@ -97,7 +104,7 @@ describe('Navbar', () => {
       clearCart: mockClearCart
     });
 
-    render(<AppNavbar />);
+    renderNavbar();
     fireEvent.click(screen.getByText('Cart'));
     
     fireEvent.click(screen.getByText('Remove'));

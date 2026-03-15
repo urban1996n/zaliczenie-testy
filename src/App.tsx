@@ -1,23 +1,28 @@
 import React from 'react';
 import AppNavbar from './components/Navbar';
-import ProductList from './components/ProductList';
+import ProductCatalog from './components/ProductCatalog';
 import { AuthProvider } from './Domain/Identity/Auth/AuthContext';
 import { CartProvider } from './Domain/Store/Cart/CartContext';
-import { Container } from 'react-bootstrap';
-import './App.css'; // Keep existing App.css if it has global styles or remove if not needed
+import { ProductProvider } from './Domain/Store/Product/ProductContext';
+import { NotificationProvider } from './Domain/UI/Notification/NotificationContext';
+import './App.css';
+import NotificationCenter from './components/NotificationCenter';
 
 function App() {
   return (
-    <AuthProvider>
-      <CartProvider>
-        <div className="App">
-          <AppNavbar />
-          <Container className="my-4">
-            <ProductList />
-          </Container>
-        </div>
-      </CartProvider>
-    </AuthProvider>
+    <NotificationProvider>
+      <AuthProvider>
+        <CartProvider>
+          <ProductProvider>
+            <div className="App">
+              <NotificationCenter />
+              <AppNavbar />
+              <ProductCatalog />
+            </div>
+          </ProductProvider>
+        </CartProvider>
+      </AuthProvider>
+    </NotificationProvider>
   );
 }
 

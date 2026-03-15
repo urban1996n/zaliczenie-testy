@@ -2,20 +2,14 @@ import React from 'react';
 import { Card, Button } from 'react-bootstrap';
 import { useAuth } from '../Domain/Identity/Auth/AuthContext';
 import { useCart } from '../Domain/Store/Cart/CartContext';
-
-interface Product {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  imageUrl: string;
-}
+import { Product } from '../types/Product';
 
 interface ProductCardProps {
   product: Product;
+  onSelect: (productId: string) => void;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ product, onSelect }) => {
   const { user } = useAuth();
   const { addToCart } = useCart();
 
@@ -32,6 +26,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <Card.Text>
           <strong data-testid="product-price">${product.price.toFixed(2)}</strong>
         </Card.Text>
+        <Button variant="outline-secondary" className="me-2" onClick={() => onSelect(product.id)}>
+          View Details
+        </Button>
         {user && ( // Only show "Add to Cart" if user is logged in
           <Button variant="primary" onClick={handleAddToCart} data-testid="add-to-cart">
             Add to Cart
