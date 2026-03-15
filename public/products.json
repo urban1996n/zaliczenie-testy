@@ -4,34 +4,74 @@
     "name": "Laptop Pro",
     "description": "Powerful laptop for professionals.",
     "price": 1200.00,
-    "imageUrl": "/images/laptop.jpg"
+    "imageUrl": "/images/laptop.jpg",
+    "comments": [
+      {
+        "id": "1-c1",
+        "author": "Anna",
+        "text": "Excellent performance for work and travel.",
+        "createdAt": "2026-03-01T10:00:00.000Z"
+      }
+    ]
   },
   {
     "id": "2",
     "name": "Wireless Mouse",
     "description": "Ergonomic wireless mouse.",
     "price": 25.00,
-    "imageUrl": "/images/mouse.webp"
+    "imageUrl": "/images/mouse.webp",
+    "comments": [
+      {
+        "id": "2-c1",
+        "author": "Marek",
+        "text": "Battery lasts a long time and the grip is comfortable.",
+        "createdAt": "2026-03-02T12:30:00.000Z"
+      }
+    ]
   },
   {
     "id": "3",
     "name": "Mechanical Keyboard",
     "description": "RGB mechanical gaming keyboard.",
     "price": 80.00,
-    "imageUrl": "/images/keyboard.jpg"
+    "imageUrl": "/images/keyboard.jpg",
+    "comments": [
+      {
+        "id": "3-c1",
+        "author": "Kasia",
+        "text": "Keys feel great and the lighting is easy to customize.",
+        "createdAt": "2026-03-03T18:45:00.000Z"
+      }
+    ]
   },
   {
     "id": "4",
     "name": "USB-C Hub",
     "description": "Multi-port USB-C adapter.",
     "price": 45.00,
-    "imageUrl": "/images/usb_hub.jpg"
+    "imageUrl": "/images/usb_hub.jpg",
+    "comments": [
+      {
+        "id": "4-c1",
+        "author": "Piotr",
+        "text": "Useful selection of ports for a slim laptop setup.",
+        "createdAt": "2026-03-04T08:15:00.000Z"
+      }
+    ]
   },
   {
     "id": "5",
     "name": "External SSD 1TB",
     "description": "Fast and portable solid-state drive.",
     "price": 100.00,
-    "imageUrl": "/images/ssd.png"
+    "imageUrl": "/images/ssd.png",
+    "comments": [
+      {
+        "id": "5-c1",
+        "author": "Ola",
+        "text": "Transfer speeds are solid and the drive is very compact.",
+        "createdAt": "2026-03-05T14:20:00.000Z"
+      }
+    ]
   }
 ]

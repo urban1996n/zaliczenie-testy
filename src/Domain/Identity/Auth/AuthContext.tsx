@@ -1,4 +1,5 @@
 import { createContext, useState, useContext, useEffect, ReactNode } from 'react';
+import { useNotification } from '../../UI/Notification/NotificationContext';
 
 interface AuthContextType {
   user: string | null;
@@ -9,6 +10,7 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
+  const { showNotification } = useNotification();
   const [user, setUser] = useState<string | null>(() => {
     return sessionStorage.getItem('username') || null;
   });
@@ -25,10 +27,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const login = (username: string) => {
     setUser(username);
+    showNotification(`Logged in as ${username}.`, 'success');
   };
 
   const logout = () => {
     setUser(null);
+    showNotification('Logged out successfully.', 'info');
   };
 
   return (

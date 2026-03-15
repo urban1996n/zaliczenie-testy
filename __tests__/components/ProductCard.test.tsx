@@ -17,6 +17,7 @@ const mockProduct = {
 
 describe('ProductCard', () => {
   const mockAddToCart = jest.fn();
+  const mockOnSelect = jest.fn();
 
   beforeEach(() => {
     (useCart as jest.Mock).mockReturnValue({
@@ -31,7 +32,7 @@ describe('ProductCard', () => {
   it('should render product information correctly', () => {
     (useAuth as jest.Mock).mockReturnValue({ user: null });
     
-    render(<ProductCard product={mockProduct} />);
+    render(<ProductCard product={mockProduct} onSelect={mockOnSelect} />);
     
     expect(screen.getByText('Test Product')).toBeInTheDocument();
     expect(screen.getByText('Test Description')).toBeInTheDocument();
@@ -42,7 +43,7 @@ describe('ProductCard', () => {
   it('should not show "Add to Cart" button if user is not logged in', () => {
     (useAuth as jest.Mock).mockReturnValue({ user: null });
     
-    render(<ProductCard product={mockProduct} />);
+    render(<ProductCard product={mockProduct} onSelect={mockOnSelect} />);
     
     expect(screen.queryByText('Add to Cart')).not.toBeInTheDocument();
   });
@@ -50,7 +51,7 @@ describe('ProductCard', () => {
   it('should show "Add to Cart" button if user is logged in', () => {
     (useAuth as jest.Mock).mockReturnValue({ user: 'testuser' });
     
-    render(<ProductCard product={mockProduct} />);
+    render(<ProductCard product={mockProduct} onSelect={mockOnSelect} />);
     
     expect(screen.getByText('Add to Cart')).toBeInTheDocument();
   });
@@ -58,11 +59,21 @@ describe('ProductCard', () => {
   it('should call addToCart when "Add to Cart" button is clicked', () => {
     (useAuth as jest.Mock).mockReturnValue({ user: 'testuser' });
     
-    render(<ProductCard product={mockProduct} />);
+    render(<ProductCard product={mockProduct} onSelect={mockOnSelect} />);
     
     const addButton = screen.getByText('Add to Cart');
     fireEvent.click(addButton);
     
     expect(mockAddToCart).toHaveBeenCalledWith(mockProduct);
+  });
+
+  it('should call onSelect when "View Details" button is clicked', () => {
+    (useAuth as jest.Mock).mockReturnValue({ user: null });
+
+    render(<ProductCard product={mockProduct} onSelect={mockOnSelect} />);
+
+    fireEvent.click(screen.getByText('View Details'));
+
+    expect(mockOnSelect).toHaveBeenCalledWith('1');
   });
 });
